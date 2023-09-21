@@ -12,7 +12,8 @@
     height: 100vh;
   }
 
-  .counter {
+  .counter,
+  #init {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -20,7 +21,25 @@
     text-align: center;
   }
 
-  .counter.hide {
+  #init {
+    z-index: 9999;
+  }
+
+  #start {
+    border-radius: 12px;
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+  }
+
+
+  .counter.hide,
+  #init.hide {
     transform: translate(-50%, -50%) scale(0);
     animation: hide .2s ease-out;
   }
@@ -152,9 +171,12 @@
 <script src=""></script>
 
 <body>
-  <div class="counter">
+  <div id="init">
+    <button id="start">Cliccami!!</button>
+  </div>
+  <div class="counter hide">
     <div class="nums">
-      <span class="in">3</span>
+      <span>3</span>
       <span>2</span>
       <span>1</span>
       <span>0</span>
@@ -163,7 +185,6 @@
   </div>
   <div class="final">
     <h1>Scusatemi!</h1>
-    <button id="replay">Cliccami!!</button>
   </div>
   <footer>
     <p>Created by persona misteriosa</a></p>
@@ -175,13 +196,14 @@
     const nums = document.querySelectorAll('.nums span');
     const counter = document.querySelector('.counter');
     const finalMessage = document.querySelector('.final');
-    const repl = document.getElementById('replay');
+    const start = document.getElementById('start');
+    const init = document.getElementById('init');
 
-    runAnimation();
 
     function resetDOM() {
       counter.classList.remove('hide');
       finalMessage.classList.remove('show');
+      init.classList.add("hide")
 
       nums.forEach(num => {
         num.classList.value = '';
@@ -217,7 +239,7 @@
       });
     }
 
-    repl.addEventListener('click', () => {
+    start.addEventListener('click', () => {
       resetDOM();
       runAnimation();
     });
